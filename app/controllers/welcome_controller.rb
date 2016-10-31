@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
   def index
     if params[:view_map]
-      puts "map"
+      render "publication_map/search_by_map"
     elsif params[:view_all]
       puts "all"
     elsif params[:q] != nil
@@ -10,6 +10,7 @@ class WelcomeController < ApplicationController
         redirect_to root_url
         puts root_url
       else
+        render "search/search", :locals => {:keyword => params[:q]}
         puts params[:q]
       end
     end

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   # Example of regular route:
     get 'search' => "welcome#index"
-    get 'map' => "publication_map/search_by_map"
+    get 'map' => "map"
     get 'all' => "all"
     # 'catalog#view'
 
