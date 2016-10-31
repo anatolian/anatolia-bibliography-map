@@ -8,7 +8,7 @@ gem 'sqlite3'
 
 gem 'annotate'
 
-gem 'sprockets', '3.7.0'
+gem 'sprockets', '3.6.3'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
