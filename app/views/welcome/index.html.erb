@@ -1,7 +1,10 @@
-<h1>Welcome</h1>
-<%= form_tag("/search", method: "get") do %>
-<%= text_field_tag(:q) %>
-<%= submit_tag("Search") %>
-<%= submit_tag("Publications Map", name: "view_map")%>
-<%= submit_tag("View All Publications", name: "view_all")%>
-<% end %>
+<welcome>
+	<h3>Welcome to</h3>
+	<h1>Archaeology Biblio Map of Turkey</h1>
+	<%= form_tag("/search", method: "get") do %>
+	<%= text_field_tag(:q) %>
+	<%= submit_tag("Search") %>
+	<%= submit_tag("Publications Map", name: "view_map")%>
+	<%= submit_tag("View All Publications", name: "view_all")%>
+	<% end %>
+</welcome>
