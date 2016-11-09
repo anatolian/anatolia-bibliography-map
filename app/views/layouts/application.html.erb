@@ -10,5 +10,14 @@
 
 <%= yield %>
 
+<div class="container-fluid">
+  <% flash.each do |name, msg| -%>
+    <div class="alert alert-success">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%= msg %>
+    </div>        
+  <% end -%>
+</div>
+
 </body>
 </html>

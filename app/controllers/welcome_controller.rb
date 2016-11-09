@@ -9,7 +9,7 @@ class WelcomeController < ApplicationController
         # puts "Empty string"
         # redirect_to root_url
         # puts root_url
-        flash[:success] = 'You left the search box empty. You will now be directed to a listing of all publications...'
+        flash.now[:success] = 'You will now be re-directed to the listing of all publications in our database'
         puts "all"
       else
         render "search/search", :locals => {:keyword => params[:q]}
