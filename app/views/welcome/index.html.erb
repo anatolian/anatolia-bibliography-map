@@ -1,5 +1,5 @@
 <welcome>
-  <div class="banner">
+  <div class="banner" style="padding-top: 50px">
     <h3>Welcome to</h3>
     <h1>Archaeology Biblio Map of Turkey</h1>
   </div>
@@ -9,7 +9,7 @@
     	<%= form_tag "/search", method: "get" , :class => 'form-inline' do %>
         <fieldset>
           <div class="col-md-6 col-md-offset-3">
-            <div class="input-group">
+            <div class="input-group" style="padding-top: 180px">
             	<%= text_field_tag :q, nil, class: 'form-control', :placeholder=>"input your search keyword here"%>
               <div class="input-group-btn">
                 <%= button_tag(type: "submit", name: "search", class: "btn btn-default btn-sm btn-primary form-control") do %>
@@ -18,8 +18,8 @@
               </div>
             </div>
           </div>
-          <br><br>
-          <div class = "form-group">
+          <br><br><br>
+          <div class = "form-group"  style="padding-top: 180px">
             <div class="col-md-6 col-md-offset-3">
             	<%= submit_tag "Publications Map", name: "view_map", class: 'btn btn-default btn-sm btn-info', style: "margin-right: 20px"%>
             	<%= submit_tag "View All Publications", name: "view_all", class: 'btn btn-default btn-sm btn-info'%>
