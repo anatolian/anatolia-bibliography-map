@@ -1,0 +1,2 @@
+json.extract! article, :id, :publication_id, :text_start_page, :text_end_page, :figure_start_page, :figure_end_page, :pdf_start_page, :turkish_title, :english_title, :other_title, :language, :location_id, :created_at, :updated_at
+json.url article_url(article, format: :json)

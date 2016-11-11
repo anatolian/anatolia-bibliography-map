@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  publication_serie: MyString
+  volume: 1
+  number: 1
+  url: MyText
+
+two:
+  publication_serie: MyString
+  volume: 1
+  number: 1
+  url: MyText

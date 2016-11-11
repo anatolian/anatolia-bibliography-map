@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Articles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Publication</th>
+      <th>Text start page</th>
+      <th>Text end page</th>
+      <th>Figure start page</th>
+      <th>Figure end page</th>
+      <th>Pdf start page</th>
+      <th>Turkish title</th>
+      <th>English title</th>
+      <th>Other title</th>
+      <th>Language</th>
+      <th>Location</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @articles.each do |article| %>
+      <tr>
+        <td><%= article.publication %></td>
+        <td><%= article.text_start_page %></td>
+        <td><%= article.text_end_page %></td>
+        <td><%= article.figure_start_page %></td>
+        <td><%= article.figure_end_page %></td>
+        <td><%= article.pdf_start_page %></td>
+        <td><%= article.turkish_title %></td>
+        <td><%= article.english_title %></td>
+        <td><%= article.other_title %></td>
+        <td><%= article.language %></td>
+        <td><%= article.location %></td>
+        <td><%= link_to 'Show', article %></td>
+        <td><%= link_to 'Edit', edit_article_path(article) %></td>
+        <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Article', new_article_path %>

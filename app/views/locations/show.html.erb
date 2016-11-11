@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @location.name %>
+</p>
+
+<p>
+  <strong>Coordinate 1:</strong>
+  <%= @location.coordinate_1 %>
+</p>
+
+<p>
+  <strong>Coordinate 2:</strong>
+  <%= @location.coordinate_2 %>
+</p>
+
+<p>
+  <strong>Coordinate 3:</strong>
+  <%= @location.coordinate_3 %>
+</p>
+
+<p>
+  <strong>Coordinate 4:</strong>
+  <%= @location.coordinate_4 %>
+</p>
+
+<%= link_to 'Edit', edit_location_path(@location) %> |
+<%= link_to 'Back', locations_path %>

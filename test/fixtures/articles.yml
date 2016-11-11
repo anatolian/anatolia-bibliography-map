@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  publication_id: 
+  text_start_page: 1
+  text_end_page: 1
+  figure_start_page: 1
+  figure_end_page: 1
+  pdf_start_page: 1
+  turkish_title: MyText
+  english_title: MyText
+  other_title: MyText
+  language: MyString
+  location_id: 
+
+two:
+  publication_id: 
+  text_start_page: 1
+  text_end_page: 1
+  figure_start_page: 1
+  figure_end_page: 1
+  pdf_start_page: 1
+  turkish_title: MyText
+  english_title: MyText
+  other_title: MyText
+  language: MyString
+  location_id: 
