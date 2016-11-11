@@ -14,4 +14,8 @@
 class Publication < ActiveRecord::Base
 	has_many :articles
 	has_many :locations, through: :articles
+
+	validates :publication_serie, presence: true
+	validates :volume, :number, numericality: { only_integer: true }
+	validates :url, format: { with: /\Ahttp:\/\/www\.(.+)\.pdf\z/, message: "invalid url" }
 end
