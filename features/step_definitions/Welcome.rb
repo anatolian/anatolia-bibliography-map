@@ -4,7 +4,8 @@ end
 
 When(/^I try to search on keyword$/) do
   fill_in 'q', :with => "hello"
-  click_button "Search"
+  # click_button "search"
+  find('#search_btn').click
 end
 
 Then(/^I should be able to see the keyword I typed on search page$/) do
@@ -22,7 +23,8 @@ Then(/^I shouldn't see keyword on publications map page$/) do
 end
 
 When(/^I try to search without keyword$/) do
-  click_button "Search"
+  # click_button "search"
+  find('#search_btn').click
 end
 
 Then(/^I should stay at homepage$/) do

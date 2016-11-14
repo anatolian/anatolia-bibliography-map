@@ -12,7 +12,7 @@
             <div class="input-group" style="padding-top: 180px">
             	<%= text_field_tag :q, nil, class: 'form-control', :placeholder=>"input your search keyword here"%>
               <div class="input-group-btn">
-                <%= button_tag(type: "submit", name: "search", class: "btn btn-default btn-sm btn-primary form-control") do %>
+                <%= button_tag(id: "search_btn", type: "submit", name: "search", class: "btn btn-default btn-sm btn-primary form-control") do %>
                 <i class="glyphicon glyphicon-search"></i>
                 <% end %>
               </div>
