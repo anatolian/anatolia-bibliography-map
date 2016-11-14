@@ -1,0 +1,17 @@
+1. Why are these our models? 
+
+Our client had a previously set up database in Microsoft Access. He suggested us to follow the same structure and schemas when setting up the new db. Therefor we followed the old db and created two models: Publications and Articles. In order to be able to cluster the articles by location, which is essential to our app, we also added the model Locations to store the geographical info of various archaeology sites in Turkey. Moreover, since our client requested the ability to manage the db later on, we added the model User and Admin for convenience.
+
+2. Why these associations? 
+
+We have these associations: admin belongs_to user, article belongs_to publication, article belongs_to location, location has_many articles, location has_many publications through articles, publication has_many :articles, publication has_many locations through articles.
+
+The admin of our app must be one of the users, so admin belongs to user; 
+One publication is a collection of multiple articles, so article belongs to publication & publication has many articles; 
+Each article has a main-focused site/location, but one locaiton/site will have more than one article focusing on it, so article belongs to location & location has many articles; 
+Since location has many articles, and they may belong to different publications, one location has many publications through articles; 
+A publication has multiple articles, and they may focus on different sites/locations, so one publication has many locations through articles. 
+
+3. Why these validations?
+
+We set up the validations based on the characteristics of the models. For example: admin is a user as well, so its "user" attribute must be present; each article's "location" & "publication" attributes must be present for us to be able to categorize it; each location has to have a name in order to be identified, so its "name" attribute must be present; The "url" attribute of a publicaiton must be in the format of "http://www.xxxxx.pdf" to be a valid url of the pdf document; the user's email has to be "xxx@xxx.xxx" to be a valid email address, etc.
