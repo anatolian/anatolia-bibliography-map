@@ -1,13 +1,48 @@
-<h1><%="Search by keywords: #{keyword}"%></h1>
-<ul>
-<% res.each do |a| %>
-<li>
-	<%="Title: #{a.english_title}"%>
-	<ul>
-		<li><%= "Turkish Title: #{a.turkish_title}"%></li>
-		<li><a href=<%=a.publication.url%>><%= "Publication: #{a.publication.publication_serie}" %></a></li>
-		<li><%= "Pages: #{a.text_start_page} to #{a.text_end_page}"%></li>
-	</ul>
-</li>
-<% end %>
-</ul>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+  <title>Show Results</title>
+	<style>
+		#filter {
+			height: 100%;
+	    width: 25%;
+	    float: left;
+	    background-color: white;
+	  }
+
+		#articles {
+			height: 100%;
+	    width: 75%;
+	    float: right;
+	    background-color: white;
+	  }
+
+	  html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+	</style>
+</head>
+<body>
+	<div id="filter">We will provide options to filter the results</div>
+	<div id="articles">
+		<h1><%="Search by keywords: #{keyword}"%></h1>
+		<ul>
+		<% res.each do |a| %>
+		<li>
+			<%="Title: #{a.english_title}"%>
+			<ul>
+				<li><%= "Turkish Title: #{a.turkish_title}"%></li>
+				<li><a href=<%=a.publication.url%>><%= "Publication: #{a.publication.publication_serie}" %></a></li>
+				<li><%= "Pages: #{a.text_start_page} to #{a.text_end_page}"%></li>
+			</ul>
+		</li>
+		<% end %>
+		</ul>
+	</div>
+</body>
+</html>
