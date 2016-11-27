@@ -5,6 +5,9 @@
 	<%="Title: #{a.english_title}"%>
 	<ul>
 		<li><%= "Turkish Title: #{a.turkish_title}"%></li>
+    <% if a.other_title != nil %>
+      <li><%= "#{a.language} Title: #{a.other_title}"%></li>
+    <% end %>
 		<li><a href=<%=a.publication.url%>><%= "Publication: #{a.publication.publication_serie}" %></a></li>
 		<li><%= "Pages: #{a.text_start_page} to #{a.text_end_page}"%></li>
 	</ul>
