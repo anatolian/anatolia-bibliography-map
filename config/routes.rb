@@ -1,3 +1,53 @@
+# == Route Map
+#
+#           Prefix Verb   URI Pattern                      Controller#Action
+#         articles GET    /articles(.:format)              articles#index
+#                  POST   /articles(.:format)              articles#create
+#      new_article GET    /articles/new(.:format)          articles#new
+#     edit_article GET    /articles/:id/edit(.:format)     articles#edit
+#          article GET    /articles/:id(.:format)          articles#show
+#                  PATCH  /articles/:id(.:format)          articles#update
+#                  PUT    /articles/:id(.:format)          articles#update
+#                  DELETE /articles/:id(.:format)          articles#destroy
+#     publications GET    /publications(.:format)          publications#index
+#                  POST   /publications(.:format)          publications#create
+#  new_publication GET    /publications/new(.:format)      publications#new
+# edit_publication GET    /publications/:id/edit(.:format) publications#edit
+#      publication GET    /publications/:id(.:format)      publications#show
+#                  PATCH  /publications/:id(.:format)      publications#update
+#                  PUT    /publications/:id(.:format)      publications#update
+#                  DELETE /publications/:id(.:format)      publications#destroy
+#        locations GET    /locations(.:format)             locations#index
+#                  POST   /locations(.:format)             locations#create
+#     new_location GET    /locations/new(.:format)         locations#new
+#    edit_location GET    /locations/:id/edit(.:format)    locations#edit
+#         location GET    /locations/:id(.:format)         locations#show
+#                  PATCH  /locations/:id(.:format)         locations#update
+#                  PUT    /locations/:id(.:format)         locations#update
+#                  DELETE /locations/:id(.:format)         locations#destroy
+#           admins GET    /admins(.:format)                admins#index
+#                  POST   /admins(.:format)                admins#create
+#        new_admin GET    /admins/new(.:format)            admins#new
+#       edit_admin GET    /admins/:id/edit(.:format)       admins#edit
+#            admin GET    /admins/:id(.:format)            admins#show
+#                  PATCH  /admins/:id(.:format)            admins#update
+#                  PUT    /admins/:id(.:format)            admins#update
+#                  DELETE /admins/:id(.:format)            admins#destroy
+#            users GET    /users(.:format)                 users#index
+#                  POST   /users(.:format)                 users#create
+#         new_user GET    /users/new(.:format)             users#new
+#        edit_user GET    /users/:id/edit(.:format)        users#edit
+#             user GET    /users/:id(.:format)             users#show
+#                  PATCH  /users/:id(.:format)             users#update
+#                  PUT    /users/:id(.:format)             users#update
+#                  DELETE /users/:id(.:format)             users#destroy
+#             root GET    /                                welcome#index
+#    welcome_index GET    /welcome/index(.:format)         welcome#index
+#           search GET    /search(.:format)                search#filter
+#              map GET    /map(.:format)                   publication_map#map
+#              all GET    /all(.:format)                   all#all
+#
+
 Rails.application.routes.draw do
 
   resources :articles
@@ -12,8 +62,9 @@ Rails.application.routes.draw do
   root :to => "welcome#index"
 
   # Example of regular route:
-    get 'search' => "welcome#index"
-    get 'map' => "map"
+    get 'welcome/index' => "welcome#index"
+    get 'search' => "search#filter"
+    get 'map' => "publication_map"
     get 'all' => "all"
     # 'catalog#view'
 

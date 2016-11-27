@@ -1,7 +1,13 @@
-<!DOCTYPE html>
-<html>
-
-<body>
-<%=keyword%>
-</body>
-</html>
+<h1><%="Search by keywords: #{keyword}"%></h1>
+<ul>
+<% res.each do |a| %>
+<li>
+	<%="Title: #{a.english_title}"%>
+	<ul>
+		<li><%= "Turkish Title: #{a.turkish_title}"%></li>
+		<li><a href=<%=a.publication.url%>><%= "Publication: #{a.publication.publication_serie}" %></a></li>
+		<li><%= "Pages: #{a.text_start_page} to #{a.text_end_page}"%></li>
+	</ul>
+</li>
+<% end %>
+</ul>
