@@ -37,7 +37,7 @@ class WelcomeController < ApplicationController
       @result = Article.joins(:publication).none
       values = words.split(" ")
       values.each do |word|
-        article_results = Article.where("english_title like ?", "%#{word}%").joins(:publication)
+        article_results = Article.where("turkish_title like ? OR english_title like ? OR other_title like ?", "%#{word}%", "%#{word}%", "%#{word}%").joins(:publication)
         publication_results = Article.joins(:publication).where("publication_serie like ?", "%#{word}%")
         @result |= article_results
         @result |= publication_results
