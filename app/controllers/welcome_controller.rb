@@ -21,6 +21,8 @@ class WelcomeController < ApplicationController
   def index
     if params[:view_map]
       render "publication_map/search_by_map"
+    elsif params[:view_all]
+      search_by_words("")
     elsif params[:q]
       search_by_words(params[:q])
     end
@@ -28,13 +30,17 @@ class WelcomeController < ApplicationController
 
 
   def search_by_words(words)
-    @result = Article.joins(:publication).all
     if (words.size == 0)
+      @result = Article.joins(:publication).all
       render "search/search", :locals => {:keyword => "All Publications", :res => @result}
     else
+      @result = Article.joins(:publication).none
       values = words.split(" ")
       values.each do |word|
-        @result &= Article.where("english_title like ?", "%#{word}%").joins(:publication)
+        article_results = Article.where("english_title like ?", "%#{word}%").joins(:publication)
+        publication_results = Article.joins(:publication).where("publication_serie like ?", "%#{word}%")
+        @result |= article_results
+        @result |= publication_results
       end
       render "search/search", :locals => {:keyword => words, :res => @result}
     end
