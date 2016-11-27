@@ -82,3 +82,5 @@ Article.create(publication_id: 1, text_start_page: 89, text_end_page: 104, figur
 Article.create(publication_id: 1, text_start_page: 105, text_end_page: 108, figure_start_page: 253, figure_end_page: 258, pdf_start_page: 105, turkish_title: "Ephesos Yöresindeki Antik Mağaralar", english_title: "Classical Period Caves in the Vicinity of Ephesos", language: "Turkish", location_id: )
 Article.create(publication_id: 1, text_start_page: 125, text_end_page: 132, figure_start_page: 261, figure_end_page: 266, pdf_start_page: 125, turkish_title: "Datça Yarımadası Yüzey Araştırmaları, 1982", english_title: "Datça Peninsula Surface Research, 1982", language: "Turkish", location_id: )
 Article.create(publication_id: 1, text_start_page: 139, text_end_page: 144, figure_start_page: 287, figure_end_page: 292, pdf_start_page: 139, turkish_title: "Patara Yüzey Araştırmasının Ön Verileri Hakkında", english_title: "On the Preliminary Findings of the Patara Survey", language: "Turkish", location_id: )
+
+
