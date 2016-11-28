@@ -17,4 +17,4 @@ I am able to search areas in the map and view all the sites and articles of it
 	Scenario: Draw rectangles on the map
 		Given I'm on the map page
 		When I draw rectangles on the map
-		Then I should be able to see all articles within these areas
+		Then I should be able to see all articles in the area
