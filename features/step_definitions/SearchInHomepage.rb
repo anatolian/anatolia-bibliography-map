@@ -32,5 +32,5 @@ When(/^I try to open publications map page$/) do
 end
 
 Then(/^I should see the publications map page$/) do
-  pending
+  assert page.has_content?("Search By Our Map")
 end

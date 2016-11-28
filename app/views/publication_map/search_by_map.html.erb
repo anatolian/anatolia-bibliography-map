@@ -48,11 +48,12 @@
       <input onclick="deleteMarkers();" type=button value="Delete Markers">  	
     </div>
     <div id="article">
+    <h3>Search By Our Map</h3>
       <%= form_tag("/publication_map/search_by_point", method: "get") do %>
         <%= text_field_tag :lat, nil,  :placeholder=>"latitude"%><br>
         <%= text_field_tag :lng, nil,  :placeholder=>"longitude"%><br>
         <p>
-          <%= submit_tag("Submit") %>
+          <%= submit_tag("Search A Point") %>
         </p>
       <% end %>
 
@@ -66,7 +67,7 @@
         <%= text_field_tag :lng2, nil,  :placeholder=>"longitude"%><br>
         <br>
         <p>
-          <%= submit_tag("Submit") %>
+          <%= submit_tag("Search An Area") %>
         </p>
       <% end %>
 
