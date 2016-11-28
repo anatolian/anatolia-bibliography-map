@@ -1,4 +1,7 @@
 <h1><%="Search by keywords: #{keyword}"%></h1>
+<%= form_tag "/search", method: "get" do %>
+<%= link_to "filter", :controller => "search", :action => "filter", :word => keyword, :res => res %>
+<% end %>
 <ul>
 <% res.each do |a| %>
 <li>
@@ -8,8 +11,8 @@
     <% if a.other_title != nil %>
       <li><%= "#{a.language} Title: #{a.other_title}"%></li>
     <% end %>
-		<li><a href=<%=a.publication.url%>><%= "Publication: #{a.publication.publication_serie}" %></a></li>
-		<li><%= "Pages: #{a.text_start_page} to #{a.text_end_page}"%></li>
+		<li><a href=<%=a.publication.url%>><%= "Publication: #{a.publication.publication_serie}, Volume: #{a.publication.volume}, Number: #{a.publication.number}"%></a></li>
+		<li><%= "Pages: #{a.text_start_page} - #{a.text_end_page}"%></li>
 	</ul>
 </li>
 <% end %>
