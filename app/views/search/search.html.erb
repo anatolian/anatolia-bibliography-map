@@ -1,16 +1,19 @@
-<h1><%="Search by keywords: #{keyword}"%></h1>
-<ul>
-<% res.each do |a| %>
-<li>
-	<%="Title: #{a.english_title}"%>
+<div id="filter">We will provide options to filter the results</div>
+<div id="articles">
+	<h1><%="Search by keywords: #{keyword}"%></h1>
 	<ul>
-		<li><%= "Turkish Title: #{a.turkish_title}"%></li>
-    <% if a.other_title != nil %>
-      <li><%= "#{a.language} Title: #{a.other_title}"%></li>
-    <% end %>
-		<li><a href=<%=a.publication.url%>><%= "Publication: #{a.publication.publication_serie}" %></a></li>
-		<li><%= "Pages: #{a.text_start_page} to #{a.text_end_page}"%></li>
+	<% res.each do |a| %>
+	<li>
+		<%="Title: #{a.english_title}"%>
+		<ul>
+			<li><%= "Turkish Title: #{a.turkish_title}"%></li>
+	    <% if a.other_title != nil %>
+	      <li><%= "#{a.language} Title: #{a.other_title}"%></li>
+	    <% end %>
+			<li><a href=<%=a.publication.url%>><%= "Publication: #{a.publication.publication_serie}" %></a></li>
+			<li><%= "Pages: #{a.text_start_page} to #{a.text_end_page}"%></li>
+		</ul>
+	</li>
+	<% end %>
 	</ul>
-</li>
-<% end %>
-</ul>
+</div>

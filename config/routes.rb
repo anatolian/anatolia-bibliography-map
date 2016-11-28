@@ -65,7 +65,7 @@ Rails.application.routes.draw do
     get 'welcome/index' => "welcome#index"
     get '/publication_map/search_by_point', to: "publication_map#search_by_point"
     get '/publication_map/search_by_rectangle', to: "publication_map#search_by_rectangle"
-    get 'search' => "search#filter"
+    get 'search' => "welcome#index"
     get 'map' => "publication_map"
     get 'all' => "all"
     # 'catalog#view'
