@@ -35,5 +35,4 @@ class SearchController < ApplicationController
       @result.all
     end     
   end
-
 end

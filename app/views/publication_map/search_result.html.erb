@@ -48,31 +48,24 @@
       <input onclick="deleteMarkers();" type=button value="Delete Markers">  	
     </div>
     <div id="article">
-    <h3>Search By Our Map</h3>
-      <%= form_tag("/publication_map/search_by_point", method: "get") do %>
-        <%= text_field_tag :lat, nil,  :placeholder=>"latitude"%><br>
-        <%= text_field_tag :lng, nil,  :placeholder=>"longitude"%><br>
-        <p>
-          <%= submit_tag("Search A Point") %>
-        </p>
-      <% end %>
-
-      <%= form_tag("/publication_map/search_by_rectangle", method: "get") do %>
-        <%= label_tag :upper_left %><br>
-        <%= text_field_tag :lat1, nil,  :placeholder=>"latitude"%><br>
-        <%= text_field_tag :lng1, nil,  :placeholder=>"longitude"%><br>
-        <br>
-        <%= label_tag :lower_right %><br>
-        <%= text_field_tag :lat2, nil,  :placeholder=>"latitude"%><br>
-        <%= text_field_tag :lng2, nil,  :placeholder=>"longitude"%><br>
-        <br>
-        <p>
-          <%= submit_tag("Search An Area") %>
-        </p>
-      <% end %>
-
+    <h3>Search Results:</h3>
+      <ul>
+        <% res.each do |a| %>
+          <li>
+            <%="Title: #{a.english_title}"%>
+              <ul>
+                <li><%= "Turkish Title: #{a.turkish_title}"%></li>
+                <% if a.other_title != nil %>
+                <li><%= "#{a.language} Title: #{a.other_title}"%></li>
+                <% end %>
+                <li><a href=<%=a.publication.url%>><%= "Publication: #{a.publication.publication_serie}" %></a></li>
+                <li><%= "Pages: #{a.text_start_page} to #{a.text_end_page}"%></li>
+              </ul>
+          </li>
+        <% end %>
+      </ul>
     </div>
-      
+
     <div id="map"></div>
     
     <script>
