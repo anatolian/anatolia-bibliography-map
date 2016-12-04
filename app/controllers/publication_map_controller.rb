@@ -17,7 +17,7 @@ class PublicationMapController < ApplicationController
   		end
   	end
 	
-	@result = Article.where("location_id IN (?)", loc_id).joins(:publication)
+	  @result = Article.where("location_id IN (?)", loc_id).joins(:publication, :location)
   	render "publication_map/search_result", :locals => {:res => @result}
 
   end
