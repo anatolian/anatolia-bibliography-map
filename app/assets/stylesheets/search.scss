@@ -4,13 +4,26 @@
 
 #filter {
 		height: 100%;
-	    width: 25%;
-	    float: left;
+	  width: 20%;
+	  float: left;
 }
 
 #articles {
 		height: 100%;
-	    width: 75%;
-	    float: right;
-	    background-color: white;
+	  width: 80%;
+	  float: right;
+	  background-color: white;
+}
+.row
+{
+    padding-left:20px;
+    margin-bottom: 10px;
+}
+.column
+{
+    min-height:10px;
+    width:200px;
+    float:left;
+    margin-left:10px;
+    margin-bottom: 30px;
 }

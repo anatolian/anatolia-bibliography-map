@@ -1,9 +1,30 @@
-<div id="filter">We will provide options to filter the results</div>
-<div id="articles">
-  <h1><%="Search by keywords: #{keyword}"%></h1>
+<div id="filter">
   <%= form_tag "/search", method: "get" do %>
-  <%= link_to "filter", :controller => "search", :action => "filter", :word => keyword, :res => res %>
+    <div class="row">
+      Filter by publication volume:</br>
+      <% volumes.each do |volume| %>
+      <%= check_box_tag "volume_ids[]", volume, false, :id => "volume_#{volume}" %> 
+      <%= "#{volume}&nbsp;&nbsp;&nbsp;".html_safe %>
+      <% end %>
+    </div>
+    <div class="row">
+      Filter by publication number:</br>
+      <% numbers.each do |number| %>
+      <%= check_box_tag "number_ids[]", number, false, :id => "number_#{number}" %> 
+      <%= "#{number}&nbsp;&nbsp;&nbsp;".html_safe %>
+      <% end %>
+    </div>
+    <div class="row">
+      <%= submit_tag "filter", name: "filter[#{keyword}]", class: 'btn btn-default btn-sm btn-info' %>
+    </div>
+    </br>
   <% end %>
+</div>
+<div id="articles">
+  <h1><%="&nbsp;Search by keywords: #{keyword}".html_safe %></h1>
+  <h4><%="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;About #{size} results".html_safe %></h4>
+</div>
+<div id="articles">
 	<ul>
 	<% res.each do |a| %>
 	<li>
