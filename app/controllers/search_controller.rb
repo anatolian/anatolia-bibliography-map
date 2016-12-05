@@ -30,7 +30,7 @@ class SearchController < ApplicationController
       end
     end
     filter_by_volume_number(vol: @volsf_str, num: @numsf_str)
-    render "search/search", :locals => {:keyword => @words, :res => @result, :size => @result.size, :volumes => @volumes, :numbers => @numbers}
+    render "search/search", :locals => {:keyword => @words, :res => @result, :size => @result.size, :volumes => @volumes, :numbers => @numbers, :vol_f => @vols_filter, :num_f => @nums_filter}
   end
 
   def filter_by_volume_number(opts = {})
@@ -63,8 +63,6 @@ class SearchController < ApplicationController
       end
     else
       @result.all
-    end 
-    puts "$$$$$$$$$$$$$$$$$"  
-    puts @result.size  
+    end  
   end
 end

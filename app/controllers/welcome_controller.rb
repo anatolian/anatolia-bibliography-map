@@ -44,7 +44,7 @@ class WelcomeController < ApplicationController
         @result |= article_results
         @result |= publication_results
       end
-      render "search/search", :locals => {:keyword => words, :res => @result, :size => @result.size, :volumes => @volumes, :numbers => @numbers}
+      render "search/search", :locals => {:keyword => words, :res => @result, :size => @result.size, :volumes => @volumes, :numbers => @numbers, :vol_f => nil, :num_f => nil}
     end
   end
 
