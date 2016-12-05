@@ -1,26 +1,38 @@
 class PublicationMapController < ApplicationController
   def search_by_map
   end
-	
+
   def search_by_point
-  	lat = params[:lat]
-  	lng = params[:lng ]
-
-  	loc_id = Array.new
-  	Location.all.each do |location|
-  		latitude = location.latitude
-  		longitude = location.longitude
-
-  		distance = distance([lat.to_f, lng.to_f], [latitude.to_f, longitude.to_f])
-  		if  distance < 100
-			loc_id << location.id
-  		end
-  	end
-	
-	  @result = Article.where("location_id IN (?)", loc_id).joins(:publication, :location)
-  	render "publication_map/search_result", :locals => {:res => @result}
-
+    loc_id = Array.new
+    loc_names = ['Burdur', 'Karanlık Kilise', 'Roman roads', 'Van', 'Dinar']
+    Location.all.each do |l|
+      if loc_names.include?(l.name)
+        loc_id << l.id
+      end
+    end
+    @result = Article.where("location_id IN (?)", loc_id).joins(:publication, :location)
+    render "publication_map/search_result", :locals => {:res => @result}
   end
+	
+  # def search_by_point
+  # 	lat = params[:lat]
+  # 	lng = params[:lng ]
+
+  # 	loc_id = Array.new
+  # 	Location.all.each do |location|
+  # 		latitude = location.latitude
+  # 		longitude = location.longitude
+
+  # 		distance = distance([lat.to_f, lng.to_f], [latitude.to_f, longitude.to_f])
+  # 		if  distance < 100
+		# 	loc_id << location.id
+  # 		end
+  # 	end
+	
+	 #  @result = Article.where("location_id IN (?)", loc_id).joins(:publication, :location)
+  # 	render "publication_map/search_result", :locals => {:res => @result}
+
+  # end
 
 
   def distance loc1, loc2
