@@ -22,7 +22,11 @@
     <% end %>
   </div>
   <div id="articles">
-    <h1><%="&nbsp;Search by keywords: #{keyword}".html_safe %></h1>
+    <% if keyword == "All Publications" %>
+      <h1><%="&nbsp;#{keyword}:".html_safe %></h1>
+    <% else %>  
+      <h1><%="&nbsp;Search by keywords: #{keyword}".html_safe %></h1>
+    <% end %>
     <% if vol_f != nil || num_f != nil %>
     <h4>
       <%="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Filtered by: ".html_safe %>
