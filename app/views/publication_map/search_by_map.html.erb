@@ -11,6 +11,7 @@
         width: 30%;
         float: left;
         background-color: white;
+        padding-left: 10px;
       }
 
       #map {
@@ -30,25 +31,30 @@
         top: 10px;
         left: 50%;
         z-index: 5;
-        background-color: #fff;
+        background: rgba(0,0,0,0);
         padding: 5px;
-        border: 1px solid #999;
         text-align: center;
         font-family: 'Roboto','sans-serif';
         line-height: 30px;
         padding-left: 10px;
       }
 
+      .ButtonState{display:none}
+      .Button{padding:3px; margin:4px; background:#CCC; border:1px solid #333; border-radius: 10px; cursor:pointer;}
+      .ButtonState:checked + .Button{background:#fff;}
+
     </style>
   </head>
   <body>
     <div id="floating-panel">
-		  <input onclick="searchByPoint();" type=button value="Search By Point">
-      <input onclick="searchByRectangle();" type=button value="Search By Rectangle">
+      <input onclick="searchByPoint();" type="radio" name="Button" class="ButtonState" id="Button1" value="1"/>
+      <label class="Button" for="Button1">Search By Point</label>
+      <input onclick="searchByRectangle();" type="radio" name="Button" class="ButtonState" id="Button2" value="2"/>
+      <label class="Button" for="Button2">Search By Rectangle</label>
     </div>
 
     <div id="article">
-      <h3>Search By Our Map</h3>
+      <h4>Search On Our Map</h4>
       <%= form_tag("/publication_map/search_by_point", method: "get") do %>
         <%= text_field_tag :lat, nil, :id=>"latitude"%>
         <%= text_field_tag :lng, nil, :id=>"longitude"%><br>
@@ -57,10 +63,10 @@
       <br>
 
       <%= form_tag("/publication_map/search_by_rectangle", method: "get") do %>
-        <%= label_tag :Point1 %>
+        <%= label_tag :Point1 %><br>
         <%= text_field_tag :lat1, nil, :id=>"latitude1"%>
         <%= text_field_tag :lng1, nil, :id=>"longitude1"%><br>
-        <%= label_tag :Point2 %>
+        <%= label_tag :Point2 %><br>
         <%= text_field_tag :lat2, nil, :id=>"latitude2"%>
         <%= text_field_tag :lng2, nil, :id=>"longitude2"%><br>
         <%= submit_tag("Search An Area") %>

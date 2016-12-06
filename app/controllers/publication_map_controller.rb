@@ -2,33 +2,33 @@ class PublicationMapController < ApplicationController
   def search_by_map
   end
 
-  def search_by_point
-    loc_id = Array.new
-    # loc_names = ['Burdur', 'Karanlık Kilise', 'Roman roads', 'Van']
-    loc_names = ["Burdur"]
-    Location.all.each do |l|
-      if loc_names.include?(l.name)
-        loc_id << l.id
-      end
-    end
-    @result = Article.where("location_id IN (?)", loc_id).joins(:publication, :location)
-    render "publication_map/search_result", :locals => {:res => @result}
-  end
-	
   # def search_by_point
-  # 	lat = params[:lat].to_f
-  # 	lng = params[:lng].to_f
-
-  # 	loc_id = Array.new
-  # 	Location.all.each do |location| #iterate locations
-  #     if isWithinSearchRadius(location.coordinates, lat, lng)
-  #       loc_id << location.id
+  #   loc_id = Array.new
+  #   # loc_names = ['Burdur', 'Karanlık Kilise', 'Roman roads', 'Van']
+  #   loc_names = ["Burdur"]
+  #   Location.all.each do |l|
+  #     if loc_names.include?(l.name)
+  #       loc_id << l.id
   #     end
   #   end
-	
-	 #  @result = Article.where("location_id IN (?)", loc_id).joins(:publication, :location)
-  # 	render "publication_map/search_result", :locals => {:res => @result}
+  #   @result = Article.where("location_id IN (?)", loc_id).joins(:publication, :location)
+  #   render "publication_map/search_result", :locals => {:res => @result}
   # end
+	
+  def search_by_point
+  	lat = params[:lat].to_f
+  	lng = params[:lng].to_f
+
+  	loc_id = Array.new
+  	Location.all.each do |location| #iterate locations
+      if isWithinSearchRadius(location.coordinates, lat, lng)
+        loc_id << location.id
+      end
+    end
+	
+	  @result = Article.where("location_id IN (?)", loc_id).joins(:publication, :location)
+  	render "publication_map/search_result", :locals => {:res => @result}
+  end
 
   def isWithinSearchRadius(coordinates, lat, lng)
     polygons = coordinates.split("|")
@@ -78,8 +78,8 @@ class PublicationMapController < ApplicationController
     lower_lng = [lng1, lng2].min
   	higher_lng = [lng1, lng2].max
 
-    puts "lower lat: #{lower_lat}, higher lat: #{higher_lat}"
-	  puts "lower lng: #{lower_lng}, higher lng: #{higher_lng}"
+    #puts "lower lat: #{lower_lat}, higher lat: #{higher_lat}"
+	  #puts "lower lng: #{lower_lng}, higher lng: #{higher_lng}"
 
   	loc_id = Array.new
   	Location.all.each do |location|
@@ -94,7 +94,7 @@ class PublicationMapController < ApplicationController
 
 
   def isWithinSearchRectangle(coordinates, lower_lat, higher_lat, lower_lng, higher_lng)
-    puts coordinates
+    #puts coordinates
     polygons = coordinates.split("|")
 
     polygons.each do |polygon| #iterate polygons
