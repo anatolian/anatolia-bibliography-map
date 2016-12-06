@@ -45,7 +45,7 @@
   <body>
     <div id="article">
     <h3 style="padding-left:5px">Search Results:</h3>
-      <ul>
+      <ol>
         <% res.each do |a| %>
           <li>
             <%="Title: #{a.english_title}"%>
@@ -54,17 +54,18 @@
                 <% if a.other_title != nil %>
                 <li><%= "#{a.language} Title: #{a.other_title}"%></li>
                 <% end %>
+                <li><%= "About Location: #{a.location.name}"%></li>
                 <li><a href=<%=a.publication.url%>><%= "Publication: #{a.publication.publication_serie}" %></a></li>
                 <li><%= "Pages: #{a.text_start_page} to #{a.text_end_page}"%></li>
               </ul>
               <br>
           </li>
         <% end %>
-      </ul>
+      </ol>
     </div>
 
-    <div id="map"></div>
-    
+    <div id="map" data-res="<%= res.to_json(:include => :location) %>"></div>
+
     <script>
       // In the following example, markers appear when the user clicks on the map.
       // Each marker is labeled with a single alphabetical character.
@@ -73,6 +74,7 @@
       var map;
       var index = 1;
       var markers = [];
+      var res = $('#map').data('res');
 
       function initMap() {
         var turkey = { lat: 38.9637, lng: 35.2433 };
@@ -82,10 +84,61 @@
           mapTypeId: 'terrain'
         });
 
+        for (i = 0; i < res.length; i++){
+          var areas = res[i].location.coordinates.split("|");
+          for (j = 0; j < areas.length; j++){
+            var points = areas[j].split(";");
+            var path = [];
+            for (k = 0; k < points.length; k++){
+              var latlng = points[k].split(",");
+              // window.alert(latlng);
+              var myLatLng = new google.maps.LatLng(Number(latlng[0]), Number(latlng[1]));
+              path.push(myLatLng);
+            }
+            var polygon = new google.maps.Polygon({
+              paths: path,
+              strokeColor: '#FF0000',
+              strokeOpacity: 0.9,
+              strokeWeight: 3,
+              fillColor: '#FF0000',
+              fillOpacity: 0.35
+            });
+            polygon.setMap(map);
+          }
+        }
+
+        // for (i = 0; i < res.length; i++){
+        //   var polygons = res[i].location.coordinates.split("|");
+        //   for (j = 0; j < polygons.length; j++){
+        //     var points = polygons[i].split(";");
+        //     if (points.length > 1){
+        //       var path = [];
+        //       for (k = 0; k < points.length; k++){
+        //         var latlng = points[k].split(",");
+        //         var coordinate = {lat: parseFloat(latlng[0]), lng: parseFloat(latlng[1])};
+        //         path.push(coordinate);
+        //       }
+        //       var polygon = new google.maps.Polygon({
+        //         paths: path,
+        //         strokeColor: '#FF0000',
+        //         strokeOpacity: 0.8,
+        //         strokeWeight: 3,
+        //         fillColor: '#FF0000',
+        //         fillOpacity: 0.35
+        //       });
+        //       polygon.setMap(map);
+        //     }else{
+        //       var latlng = points[0].split(",")
+        //       var location = {lat: parseFloat(latlng[0]), lng: parseFloat(latlng[1])};
+        //       addMarker(location)
+        //     }
+        //   }
+        // }
+
         // This event listener will call addMarker() when the map is clicked.
-        map.addListener('click', function(event) {
-          addMarker(event.latLng);
-        });
+        // map.addListener('click', function(event) {
+        //   addMarker(event.latLng);
+        // });
       }
 
       // Adds a marker to the map and push to the array.
