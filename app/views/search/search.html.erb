@@ -1,69 +1,69 @@
-<div id="filter">
-  <%= form_tag "/search", method: "get" do %>
-    <div class="row">
-      Filter by publication volume:</br>
-      <% volumes.each do |volume| %>
-      <%= check_box_tag "volume_ids[]", volume, false, :id => "volume_#{volume}" %> 
-      <%= "#{volume}&nbsp;&nbsp;&nbsp;".html_safe %>
-      <% end %>
-    </div>
-    <div class="row">
-      Filter by publication number:</br>
-      <% numbers.each do |number| %>
-      <%= check_box_tag "number_ids[]", number, false, :id => "number_#{number}" %> 
-      <%= "#{number}&nbsp;&nbsp;&nbsp;".html_safe %>
-      <% end %>
-    </div>
-    <div class="row">
-      <%= submit_tag "filter", name: "filter[#{keyword}]", class: 'btn btn-default btn-sm btn-info' %>
-    </div>
-    </br>
-  <% end %>
-</div>
-<div id="articles">
-  <h1><%="&nbsp;Search by keywords: #{keyword}".html_safe %></h1>
-  <% if vol_f != nil || num_f != nil %>
-  <h4>
-    <%="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Filtered by:&nbsp;".html_safe %>
-    <% if vol_f != nil%>
-      <%="volume" %>
-      <% vol_f.each_with_index do |vol, index| %>
-      <%= "#{vol}" %>
-      <% if index < vol_f.size - 1 %>
-        ,
-      <% end %>
+<div id="content">
+  <div id="filter">
+    <%= form_tag "/search", method: "get" do %>
+      <div class="row">
+        Filter by publication volume:</br>
+        <% volumes.each do |volume| %>
+        <%= check_box_tag "volume_ids[]", volume, false, :id => "volume_#{volume}" %> 
+        <%= "#{volume}&nbsp;&nbsp;&nbsp;".html_safe %>
+        <% end %>
+      </div>
+      <div class="row">
+        Filter by publication number:</br>
+        <% numbers.each do |number| %>
+        <%= check_box_tag "number_ids[]", number, false, :id => "number_#{number}" %> 
+        <%= "#{number}&nbsp;&nbsp;&nbsp;".html_safe %>
+        <% end %>
+      </div>
+      <div class="row">
+        <%= submit_tag "filter", name: "filter[#{keyword}]", class: 'btn btn-default btn-sm btn-info' %>
+      </div>
+      </br>
+    <% end %>
+  </div>
+  <div id="articles">
+    <h1><%="&nbsp;Search by keywords: #{keyword}".html_safe %></h1>
+    <% if vol_f != nil || num_f != nil %>
+    <h4>
+      <%="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Filtered by:&nbsp;".html_safe %>
+      <% if vol_f != nil%>
+        <%="volume" %>
+        <% vol_f.each_with_index do |vol, index| %>
+        <%= "#{vol}" %>
+        <% if index < vol_f.size - 1 %>
+          ,
+        <% end %>
+        <% end %>
+        <% if num_f != nil %>
+          ;
+        <% end %>
       <% end %>
       <% if num_f != nil %>
-        ;
+        <%="&nbsp;number".html_safe %>
+        <% num_f.each_with_index do |num, index| %>
+        <%= "#{num}" %>
+        <% if index < num_f.size - 1 %>
+          ,
+        <% end %>
+        <% end %>
       <% end %>
+    </h4>
     <% end %>
-    <% if num_f != nil %>
-      <%="&nbsp;number".html_safe %>
-      <% num_f.each_with_index do |num, index| %>
-      <%= "#{num}" %>
-      <% if index < num_f.size - 1 %>
-        ,
-      <% end %>
-      <% end %>
-    <% end %>
-  </h4>
-  <% end %>
-  <h5><%="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;About #{size} results".html_safe %></h5>
-</div>
-<div id="articles">
-	<ul>
-	<% res.each do |a| %>
-	<li>
-		<%="Title: #{a.english_title}"%>
-		<ul>
-			<li><%= "Turkish Title: #{a.turkish_title}"%></li>
-	    <% if a.other_title != nil %>
-	      <li><%= "#{a.language} Title: #{a.other_title}"%></li>
-	    <% end %>
-			<li><a href=<%=a.publication.url%>><%= "Publication: #{a.publication.publication_serie}, Volume: #{a.publication.volume}, Number: #{a.publication.number}"%></a></li>
-			<li><%= "Pages: #{a.text_start_page} - #{a.text_end_page}"%></li>
-		</ul>
-	</li>
-	<% end %>
-	</ul>
+    <h5><%="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;About #{size} results".html_safe %></h5>
+  	<ul>
+  	<% res.each do |a| %>
+  	<li>
+  		<%="Title: #{a.english_title}"%>
+  		<ul>
+  			<li><%= "Turkish Title: #{a.turkish_title}"%></li>
+  	    <% if a.other_title != nil %>
+  	      <li><%= "#{a.language} Title: #{a.other_title}"%></li>
+  	    <% end %>
+  			<li><a href=<%=a.publication.url%>><%= "Publication: #{a.publication.publication_serie}, Volume: #{a.publication.volume}, Number: #{a.publication.number}"%></a></li>
+  			<li><%= "Pages: #{a.text_start_page} - #{a.text_end_page}"%></li>
+  		</ul>
+  	</li>
+  	<% end %>
+  	</ul>
+  </div>
 </div>
