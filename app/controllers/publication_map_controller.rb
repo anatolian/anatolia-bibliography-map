@@ -65,8 +65,8 @@ class PublicationMapController < ApplicationController
     lower_lng = [lng1, lng2].min
   	higher_lng = [lng1, lng2].max
 
-    puts "lower lat: #{lower_lat}, higher lat: #{higher_lat}"
-	  puts "lower lng: #{lower_lng}, higher lng: #{higher_lng}"
+    #puts "lower lat: #{lower_lat}, higher lat: #{higher_lat}"
+	  #puts "lower lng: #{lower_lng}, higher lng: #{higher_lng}"
 
   	loc_id = Array.new
   	Location.all.each do |location|
@@ -81,7 +81,7 @@ class PublicationMapController < ApplicationController
 
 
   def isWithinSearchRectangle(coordinates, lower_lat, higher_lat, lower_lng, higher_lng)
-    puts coordinates
+    #puts coordinates
     polygons = coordinates.split("|")
 
     polygons.each do |polygon| #iterate polygons

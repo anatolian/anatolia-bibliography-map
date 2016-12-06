@@ -11,6 +11,7 @@
         width: 30%;
         float: left;
         background-color: white;
+        overflow:scroll;
       }
 
       #map {
@@ -42,13 +43,8 @@
     </style>
   </head>
   <body>
-    <div id="floating-panel">
-		  <input onclick="clearMarkers();" type=button value="Hide Markers">
-      <input onclick="showMarkers();" type=button value="Show All Markers">
-      <input onclick="deleteMarkers();" type=button value="Delete Markers">  	
-    </div>
     <div id="article">
-    <h3>Search Results:</h3>
+    <h3 style="padding-left:5px">Search Results:</h3>
       <ul>
         <% res.each do |a| %>
           <li>
@@ -61,6 +57,7 @@
                 <li><a href=<%=a.publication.url%>><%= "Publication: #{a.publication.publication_serie}" %></a></li>
                 <li><%= "Pages: #{a.text_start_page} to #{a.text_end_page}"%></li>
               </ul>
+              <br>
           </li>
         <% end %>
       </ul>
