@@ -30,6 +30,8 @@ class WelcomeController < ApplicationController
 
 
   def search_by_words(words)
+    @volumes = Publication.uniq.pluck(:volume)
+    @numbers = Publication.uniq.pluck(:number)
     if (words.size == 0)
       @result = Article.joins(:publication).all
       render "search/search", :locals => {:keyword => "All Publications", :res => @result}
@@ -42,7 +44,7 @@ class WelcomeController < ApplicationController
         @result |= article_results
         @result |= publication_results
       end
-      render "search/search", :locals => {:keyword => words, :res => @result}
+      render "search/search", :locals => {:keyword => words, :res => @result, :size => @result.size, :volumes => @volumes, :numbers => @numbers, :vol_f => nil, :num_f => nil}
     end
   end
 

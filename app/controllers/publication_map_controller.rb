@@ -4,7 +4,7 @@ class PublicationMapController < ApplicationController
 
   def search_by_point
     loc_id = Array.new
-    loc_names = ['Burdur', 'Karanlık Kilise', 'Roman roads', 'Van', 'Dinar']
+    loc_names = ['Burdur', 'Karanlık Kilise', 'Roman roads', 'Van']
     Location.all.each do |l|
       if loc_names.include?(l.name)
         loc_id << l.id
@@ -16,20 +16,31 @@ class PublicationMapController < ApplicationController
 	
   # def search_by_point
   # 	lat = params[:lat]
-  # 	lng = params[:lng ]
+  # 	lng = params[:lng]
 
   # 	loc_id = Array.new
   # 	Location.all.each do |location|
-  # 		latitude = location.latitude
-  # 		longitude = location.longitude
+  #     coordinates = location.coordinates
 
-  # 		distance = distance([lat.to_f, lng.to_f], [latitude.to_f, longitude.to_f])
-  # 		if  distance < 100
-		# 	loc_id << location.id
+  #     values = coordinates.split(";")
+  #     smallestDis = Float::MAX
+  #     values.each do |value|
+  #       coordinate = value.split(",")
+  #       latitude = coordinate[0]
+  #       longitude = coordinate[1]
+
+  #       distance = distance([lat.to_f, lng.to_f], [latitude.to_f, longitude.to_f])
+  #       if distance < smallestDis
+  #         smallestDis = distance
+  #       end
+  #     end
+
+  # 		if  smallestDis < 100
+		# 	 loc_id << location.id
   # 		end
   # 	end
 	
-	 #  @result = Article.where("location_id IN (?)", loc_id).joins(:publication, :location)
+	 #  @result = Article.where("location_id IN (?)", loc_id).joins(:publication)
   # 	render "publication_map/search_result", :locals => {:res => @result}
 
   # end
@@ -59,28 +70,40 @@ class PublicationMapController < ApplicationController
   	lat2 = params[:lat2].to_f
   	lng2 = params[:lng2].to_f
 
+    puts "Point 1"
+    puts lat1
+    puts lng1
+    puts lat2
+    puts lng2
+
   	lower_lat = [lat1, lat2].min
-	higher_lat = [lat1, lat2].max
-	lower_lng = [lng1, lng2].min
+    higher_lat = [lat1, lat2].max
+    lower_lng = [lng1, lng2].min
   	higher_lng = [lng1, lng2].max
 
   	#puts "lower lat: #{lower_lat}, higher lat: #{higher_lat}"
-	#puts "lower lng: #{lower_lng}, higher lng: #{higher_lng}"
+	  #puts "lower lng: #{lower_lng}, higher lng: #{higher_lng}"
 
   	loc_id = Array.new
   	Location.all.each do |location|
-  		latitude = location.latitude.to_f
-  		longitude = location.longitude.to_f
+      coordinates = location.coordinates
 
-  		if  latitude >= lower_lat && latitude <= higher_lat && longitude >= lower_lng && longitude <= higher_lng
-			#puts "latitude: #{latitude}"
-			#puts "longitude: #{longitude}"
+      values = coordinates.split(";")
+      values.each do |value|
+        coordinate = value.split(",")
+        latitude = coordinate[0].to_f
+        longitude = coordinate[1].to_f
 
-			loc_id << location.id
-  		end
+        if  latitude >= lower_lat && latitude <= higher_lat && longitude >= lower_lng && longitude <= higher_lng
+          loc_id << location.id
+          break
+        end
+
+      end
+
   	end
-	
-	@result = Article.where("location_id IN (?)", loc_id).joins(:publication)
+
+    @result = Article.where("location_id IN (?)", loc_id).joins(:publication)
   	render "publication_map/search_result", :locals => {:res => @result}
 
   end
