@@ -33,7 +33,6 @@
         z-index: 5;
         background-color: #fff;
         padding: 5px;
-        border: 1px solid #999;
         text-align: center;
         font-family: 'Roboto','sans-serif';
         line-height: 30px;
@@ -72,6 +71,8 @@
       // The markers are stored in an array.
       // The user can then click an option to hide, show or delete the markers.
       var map;
+      var curr_location;
+      var hash = new Object();
       var index = 1;
       var markers = [];
       var res = $('#map').data('res');
@@ -86,6 +87,13 @@
 
         for (i = 0; i < res.length; i++){
           var areas = res[i].location.coordinates.split("|");
+          curr_location = res[i].location.name;
+
+          if (typeof(hash[curr_location]) == 'undefined'){
+            hash[curr_location] = new Array();
+          }
+          hash[curr_location].push(res[i].english_title);
+
           for (j = 0; j < areas.length; j++){
             var points = areas[j].split(";");
             var path = [];
@@ -96,6 +104,7 @@
               path.push(myLatLng);
             }
             var polygon = new google.maps.Polygon({
+              location: curr_location,
               paths: path,
               strokeColor: '#FF0000',
               strokeOpacity: 0.9,
@@ -104,41 +113,36 @@
               fillOpacity: 0.35
             });
             polygon.setMap(map);
+            polygon.addListener('click', showInfo);
           }
+          // window.alert(hash[curr_location]);
+        }
+      }
+
+      function showInfo(event) {
+
+        var loc = this.location;
+
+        var contentString = '<b>Name of Area: ' + loc + '</b>';
+
+        var articles = hash[loc];
+
+        // window.alert(articles);
+
+        for (var i = 0; i < articles.length; i++) {
+          var article = articles[i];
+          contentString += '<br>' + 'Articles ' + (i + 1) + ':<br>' + article;
         }
 
-        // for (i = 0; i < res.length; i++){
-        //   var polygons = res[i].location.coordinates.split("|");
-        //   for (j = 0; j < polygons.length; j++){
-        //     var points = polygons[i].split(";");
-        //     if (points.length > 1){
-        //       var path = [];
-        //       for (k = 0; k < points.length; k++){
-        //         var latlng = points[k].split(",");
-        //         var coordinate = {lat: parseFloat(latlng[0]), lng: parseFloat(latlng[1])};
-        //         path.push(coordinate);
-        //       }
-        //       var polygon = new google.maps.Polygon({
-        //         paths: path,
-        //         strokeColor: '#FF0000',
-        //         strokeOpacity: 0.8,
-        //         strokeWeight: 3,
-        //         fillColor: '#FF0000',
-        //         fillOpacity: 0.35
-        //       });
-        //       polygon.setMap(map);
-        //     }else{
-        //       var latlng = points[0].split(",")
-        //       var location = {lat: parseFloat(latlng[0]), lng: parseFloat(latlng[1])};
-        //       addMarker(location)
-        //     }
-        //   }
-        // }
+        var infoWindow = new google.maps.InfoWindow({
+          content: contentString
+        });
 
-        // This event listener will call addMarker() when the map is clicked.
-        // map.addListener('click', function(event) {
-        //   addMarker(event.latLng);
-        // });
+        // Replace the info window's content and position.
+        // infoWindow.setContent(contentString);
+        infoWindow.setPosition(event.latLng);
+
+        infoWindow.open(map);
       }
 
       // Adds a marker to the map and push to the array.
