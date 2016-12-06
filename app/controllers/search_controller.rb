@@ -41,28 +41,61 @@ class SearchController < ApplicationController
     @volumes = Publication.uniq.pluck(:volume)
     @numbers = Publication.uniq.pluck(:number)
     if vol && num
-      values.each do |word|
-        article_results = Article.where("turkish_title like ? OR english_title like ? OR other_title like ?", "%#{word}%", "%#{word}%", "%#{word}%").joins(:publication).where("volume IN " + vol + " AND number IN " + num)
-        publication_results = Article.joins(:publication).where("publication_serie like ? AND volume IN " + vol + " AND number IN " + num, "%#{word}%")
+      if @words == "All Publications"
+        article_results = Article.joins(:publication).where("volume IN " + vol + " AND number IN " + num)
+        publication_results = Article.joins(:publication).where("volume IN " + vol + " AND number IN " + num)
         @result |= article_results
         @result |= publication_results
+      else
+        values.each do |word|
+          article_results = Article.where("turkish_title like ? OR english_title like ? OR other_title like ?", "%#{word}%", "%#{word}%", "%#{word}%").joins(:publication).where("volume IN " + vol + " AND number IN " + num)
+          publication_results = Article.joins(:publication).where("publication_serie like ? AND volume IN " + vol + " AND number IN " + num, "%#{word}%")
+          @result |= article_results
+          @result |= publication_results
+        end
       end
     elsif vol && !num
-      values.each do |word|
-        article_results = Article.where("turkish_title like ? OR english_title like ? OR other_title like ?", "%#{word}%", "%#{word}%", "%#{word}%").joins(:publication).where("volume IN " + vol)
-        publication_results = Article.joins(:publication).where("publication_serie like ? AND volume IN " + vol, "%#{word}%")
+      if @words == "All Publications"
+        article_results = Article.joins(:publication).where("volume IN " + vol)
+        publication_results = Article.joins(:publication).where("volume IN " + vol)
         @result |= article_results
         @result |= publication_results
+      else
+        values.each do |word|
+          article_results = Article.where("turkish_title like ? OR english_title like ? OR other_title like ?", "%#{word}%", "%#{word}%", "%#{word}%").joins(:publication).where("volume IN " + vol)
+          publication_results = Article.joins(:publication).where("publication_serie like ? AND volume IN " + vol, "%#{word}%")
+          @result |= article_results
+          @result |= publication_results
+        end
       end
     elsif num && !vol
-      values.each do |word|
-        article_results = Article.where("turkish_title like ? OR english_title like ? OR other_title like ?", "%#{word}%", "%#{word}%", "%#{word}%").joins(:publication).where("number IN " + num)
-        publication_results = Article.joins(:publication).where("publication_serie like ? AND number IN " + num, "%#{word}%")
+      if @words == "All Publications"
+        article_results = Article.joins(:publication).where("number IN " + num)
+        publication_results = Article.joins(:publication).where("number IN " + num)
         @result |= article_results
         @result |= publication_results
+      else
+        values.each do |word|
+          article_results = Article.where("turkish_title like ? OR english_title like ? OR other_title like ?", "%#{word}%", "%#{word}%", "%#{word}%").joins(:publication).where("number IN " + num)
+          publication_results = Article.joins(:publication).where("publication_serie like ? AND number IN " + num, "%#{word}%")
+          @result |= article_results
+          @result |= publication_results
+        end
       end
     else
-      @result.all
+      if @words == "All Publications"
+        article_results = Article.joins(:publication)
+        publication_results = Article.joins(:publication)
+        @result |= article_results
+        @result |= publication_results
+      else
+        values.each do |word|
+          article_results = Article.where("turkish_title like ? OR english_title like ? OR other_title like ?", "%#{word}%", "%#{word}%", "%#{word}%").joins(:publication)
+          publication_results = Article.joins(:publication).where("publication_serie like ?", "%#{word}%")
+          @result |= article_results
+          @result |= publication_results
+        end
+      end
     end  
   end
 end

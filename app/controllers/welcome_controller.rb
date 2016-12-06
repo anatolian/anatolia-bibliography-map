@@ -34,7 +34,7 @@ class WelcomeController < ApplicationController
     @numbers = Publication.uniq.pluck(:number)
     if (words.size == 0)
       @result = Article.joins(:publication).all
-      render "search/search", :locals => {:keyword => "All Publications", :res => @result}
+      render "search/search", :locals => {:keyword => "All Publications", :res => @result, :size => @result.size, :volumes => @volumes, :numbers => @numbers, :vol_f => nil, :num_f => nil}
     else
       @result = Article.joins(:publication).none
       values = words.split(" ")

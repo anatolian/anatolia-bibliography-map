@@ -87,35 +87,56 @@
           mapTypeId: 'terrain'
         });
 
-        // window.alert(res.length)
-
         for (i = 0; i < res.length; i++){
-          var polygons = res[i].location.coordinates.split("|");
-          for (j = 0; j < polygons.length; j++){
-            var points = polygons[i].split(";");
-            if (points.length > 1){
-              var path = [];
-              for (k = 0; k < points.length; k++){
-                var latlng = points[k].split(",");
-                var coordinate = {lat: parseFloat(latlng[0]), lng: parseFloat(latlng[1])};
-                path.push(coordinate);
-              }
-              var polygon = new google.maps.Polygon({
-                paths: path,
-                strokeColor: '#FF0000',
-                strokeOpacity: 0.8,
-                strokeWeight: 3,
-                fillColor: '#FF0000',
-                fillOpacity: 0.35
-              });
-              polygon.setMap(map);
-            }else{
-              var latlng = points.split(",")
-              var location = {lat: parseFloat(latlng[0]), lng: parseFloat(latlng[1])};
-              addMarker(location)
+          var areas = res[i].location.coordinates.split("|");
+          for (j = 0; j < areas.length; j++){
+            var points = areas[j].split(";");
+            var path = [];
+            for (k = 0; k < points.length; k++){
+              var latlng = points[k].split(",");
+              // window.alert(latlng);
+              var myLatLng = new google.maps.LatLng(Number(latlng[0]), Number(latlng[1]));
+              path.push(myLatLng);
             }
+            var polygon = new google.maps.Polygon({
+              paths: path,
+              strokeColor: '#FF0000',
+              strokeOpacity: 0.9,
+              strokeWeight: 3,
+              fillColor: '#FF0000',
+              fillOpacity: 0.35
+            });
+            polygon.setMap(map);
           }
         }
+
+        // for (i = 0; i < res.length; i++){
+        //   var polygons = res[i].location.coordinates.split("|");
+        //   for (j = 0; j < polygons.length; j++){
+        //     var points = polygons[i].split(";");
+        //     if (points.length > 1){
+        //       var path = [];
+        //       for (k = 0; k < points.length; k++){
+        //         var latlng = points[k].split(",");
+        //         var coordinate = {lat: parseFloat(latlng[0]), lng: parseFloat(latlng[1])};
+        //         path.push(coordinate);
+        //       }
+        //       var polygon = new google.maps.Polygon({
+        //         paths: path,
+        //         strokeColor: '#FF0000',
+        //         strokeOpacity: 0.8,
+        //         strokeWeight: 3,
+        //         fillColor: '#FF0000',
+        //         fillOpacity: 0.35
+        //       });
+        //       polygon.setMap(map);
+        //     }else{
+        //       var latlng = points[0].split(",")
+        //       var location = {lat: parseFloat(latlng[0]), lng: parseFloat(latlng[1])};
+        //       addMarker(location)
+        //     }
+        //   }
+        // }
 
         // This event listener will call addMarker() when the map is clicked.
         // map.addListener('click', function(event) {
