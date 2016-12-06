@@ -25,7 +25,7 @@
     <h1><%="&nbsp;Search by keywords: #{keyword}".html_safe %></h1>
     <% if vol_f != nil || num_f != nil %>
     <h4>
-      <%="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Filtered by:&nbsp;".html_safe %>
+      <%="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Filtered by: ".html_safe %>
       <% if vol_f != nil%>
         <%="volume" %>
         <% vol_f.each_with_index do |vol, index| %>
