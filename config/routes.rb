@@ -63,6 +63,7 @@ Rails.application.routes.draw do
 
   # Example of regular route:
     get 'welcome/index' => "welcome#index"
+    get '/search_home' => "welcome#index"
     get '/search' => "search#filter"
     get '/publication_map/search_by_point', to: "publication_map#search_by_point"
     get '/publication_map/search_by_rectangle', to: "publication_map#search_by_rectangle"
