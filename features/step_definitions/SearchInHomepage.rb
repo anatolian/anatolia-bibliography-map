@@ -16,7 +16,7 @@ When(/^I click the search button without keywords$/) do
 end
 
 Then(/^I should be able to see all the publications$/) do
-  assert page.has_content?("Search by keywords: All Publications")
+  assert page.has_content?("All Publications:")
 end
 
 When(/^I click the View All Publications button$/) do
@@ -24,7 +24,7 @@ When(/^I click the View All Publications button$/) do
 end
 
 Then(/^I I should be able to see all the publications$/) do
-  assert page.has_content?("Search by keywords: All Publications")
+  assert page.has_content?("All Publications:")
 end
 
 When(/^I try to open publications map page$/) do
@@ -32,5 +32,5 @@ When(/^I try to open publications map page$/) do
 end
 
 Then(/^I should see the publications map page$/) do
-  assert page.has_content?("Search By Our Map")
+  assert page.has_content?("Search On Our Map")
 end
