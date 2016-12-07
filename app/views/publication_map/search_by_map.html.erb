@@ -56,20 +56,24 @@
     <div id="article">
       <h4>Search On Our Map</h4>
       <%= form_tag("/publication_map/search_by_point", method: "get") do %>
-        <%= text_field_tag :lat, nil, :id=>"latitude"%>
-        <%= text_field_tag :lng, nil, :id=>"longitude"%><br>
-        <%= submit_tag("Search A Point") %>
+        <%= text_field_tag :lat, nil, :id=>"latitude", :placeholder=>"latitude"%>
+        <%= text_field_tag :lng, nil, :id=>"longitude", :placeholder=>"longitude"%>
+        <%= button_tag(type:"submit", class: "btn btn-success btn-sm", style: "margin-top: 5px") do %>
+          Search A Point
+        <% end %>
       <% end %>
       <br>
-
+      <br>
       <%= form_tag("/publication_map/search_by_rectangle", method: "get") do %>
-        <%= label_tag :Point1 %><br>
-        <%= text_field_tag :lat1, nil, :id=>"latitude1"%>
-        <%= text_field_tag :lng1, nil, :id=>"longitude1"%><br>
-        <%= label_tag :Point2 %><br>
-        <%= text_field_tag :lat2, nil, :id=>"latitude2"%>
-        <%= text_field_tag :lng2, nil, :id=>"longitude2"%><br>
-        <%= submit_tag("Search An Area") %>
+        <span class="label label-default">Point 1</span><br>
+        <%= text_field_tag :lat1, nil, :id=>"latitude1", :placeholder=>"latitude"%>
+        <%= text_field_tag :lng1, nil, :id=>"longitude1", :placeholder=>"longitude", :style=>"margin-bottom: 5px"%><br>
+        <span class="label label-default">Point 2</span><br>
+        <%= text_field_tag :lat2, nil, :id=>"latitude2", :placeholder=>"latitude"%>
+        <%= text_field_tag :lng2, nil, :id=>"longitude2", :placeholder=>"longitude"%>
+        <%= button_tag(type:"submit", class: "btn btn-success btn-sm", style: "margin-top: 5px") do %>
+          Search A Area
+        <% end %>
       <% end %>
     </div>
       
