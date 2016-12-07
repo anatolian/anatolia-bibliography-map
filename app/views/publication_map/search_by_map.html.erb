@@ -72,9 +72,11 @@
         <%= text_field_tag :lat2, nil, :id=>"latitude2", :placeholder=>"latitude"%>
         <%= text_field_tag :lng2, nil, :id=>"longitude2", :placeholder=>"longitude"%>
         <%= button_tag(type:"submit", class: "btn btn-success btn-sm", style: "margin-top: 5px") do %>
-          Search A Area
+          Search An Area
         <% end %>
       <% end %>
+      </br>
+      <%= link_to "&nbsp;back to home page".html_safe, :controller => "welcome", :style => "color:#030a4b;" %>
     </div>
       
     <div id="map"></div>
