@@ -35,14 +35,14 @@ class WelcomeController < ApplicationController
     @volumes = Publication.uniq.pluck(:volume)
     @numbers = Publication.uniq.pluck(:number)
     if (words.size == 0)
-      @result = Article.joins(:publication).all
+      @result = Article.joins(:publication, :location).all
       render "search/search", :locals => {:keyword => "All Publications", :res => @result, :size => @result.size, :volumes => @volumes, :numbers => @numbers, :vol_f => nil, :num_f => nil}
     else
       @result = Article.joins(:publication).none
       values = words.split(" ")
       values.each do |word|
-        article_results = Article.where("turkish_title like ? OR english_title like ? OR other_title like ?", "%#{word}%", "%#{word}%", "%#{word}%").joins(:publication)
-        publication_results = Article.joins(:publication).where("publication_serie like ?", "%#{word}%")
+        article_results = Article.where("turkish_title like ? OR english_title like ? OR other_title like ?", "%#{word}%", "%#{word}%", "%#{word}%").joins(:publication, :location)
+        publication_results = Article.joins(:publication, :location).where("publication_serie like ?", "%#{word}%")
         @result |= article_results
         @result |= publication_results
       end
