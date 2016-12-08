@@ -28,7 +28,7 @@
 
       #floating-panel {
         position: absolute;
-        top: 10px;
+        top: 90px;
         left: 50%;
         z-index: 5;
         background: rgba(0,0,0,0);
@@ -44,6 +44,12 @@
       .ButtonState:checked + .Button{background:#fff;}
 
     </style>
+    <welcome>
+      <div class="banner" style="padding-top: 5px">
+        <!-- <h3>Welcome to</h3> -->
+        <h2>Archaeology Biblio Map of Turkey</h2>
+      </div>
+    </welcome>
   </head>
   <body>
     <div id="floating-panel">
@@ -75,8 +81,19 @@
           Search An Area
         <% end %>
       <% end %>
+      <br>
+      <br>
+      <%= form_tag "/search_home", method: "get" , :class => 'form-inline' do %>
+        <%= text_field_tag :q, nil, class: 'form-control', :placeholder=>"search keyword"%>
+        </br>
+        <%= button_tag(id: "search_btn", type: "submit", name: "search", class: "btn btn-success btn-sm form-control", style: "margin-top: 5px") do %>
+          Search an article
+        <% end %>
       </br>
-      <%= link_to "&nbsp;back to home page".html_safe, :controller => "welcome", :style => "color:#030a4b;" %>
+      <div>
+          <%= submit_tag "View All Publications", name: "view_all", class: 'btn btn-success btn-sm', style: "margin-top: 10px"%>
+      </div>
+      <% end %>
     </div>
       
     <div id="map"></div>

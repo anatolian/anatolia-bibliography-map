@@ -59,10 +59,9 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root :to => "welcome#index"
+  root :to => "publication_map#index"
 
   # Example of regular route:
-    get 'welcome/index' => "welcome#index"
     get '/search_home' => "welcome#index"
     get '/search' => "search#filter"
     get '/publication_map/search_by_point', to: "publication_map#search_by_point"
