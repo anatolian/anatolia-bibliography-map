@@ -1,5 +1,6 @@
 class PublicationMapController < ApplicationController
-  def search_by_map
+  def index
+    render "publication_map/search_by_map"
   end
 
   # def search_by_point
