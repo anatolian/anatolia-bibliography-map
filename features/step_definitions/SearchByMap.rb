@@ -10,7 +10,6 @@ When(/^I click a point on the map$/) do
 end
 
 Then(/^I should be able to see articles of that point of location$/) do
-  # assert page.has_content?("Search Results:")
   assert page.has_content?("Search Results:")
 end
 
@@ -23,6 +22,5 @@ When(/^I draw rectangles on the map$/) do
 end
 
 Then(/^I should be able to see all articles in the area$/) do
-  # assert page.has_content?("Search Results:")
   assert page.has_content?("Search Results:")
 end

@@ -33,4 +33,6 @@ end
 
 Then(/^I should see the publications map page$/) do
   assert page.has_content?("Search On Our Map")
+  assert page.has_content?("Search By Point")
+  assert page.has_content?("Search By Rectangle")
 end
