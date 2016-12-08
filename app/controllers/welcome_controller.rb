@@ -1,5 +1,7 @@
 class WelcomeController < ApplicationController
 
+  attr_accessor :result
+
   # def index
   #   if params[:view_map]
   #     render "publication_map/search_by_map"
