@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161204231427) do
+ActiveRecord::Schema.define(version: 20161208213929) do
 
   create_table "admins", force: :cascade do |t|
     t.integer  "user_id"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20161204231427) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.text     "coordinates"
+    t.float    "distance"
   end
 
   create_table "publications", force: :cascade do |t|
