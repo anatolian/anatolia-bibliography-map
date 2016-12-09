@@ -1,37 +1,25 @@
 class PublicationMapController < ApplicationController
+
   def index
     render "publication_map/search_by_map"
   end
-
-  # def search_by_point
-  #   loc_id = Array.new
-  #   # loc_names = ['Burdur', 'Karanlık Kilise', 'Roman roads', 'Van']
-  #   loc_names = ["Burdur"]
-  #   Location.all.each do |l|
-  #     if loc_names.include?(l.name)
-  #       loc_id << l.id
-  #     end
-  #   end
-  #   @result = Article.where("location_id IN (?)", loc_id).joins(:publication, :location)
-  #   render "publication_map/search_result", :locals => {:res => @result}
-  # end
 	
   def search_by_point
   	lat = params[:lat].to_f
   	lng = params[:lng].to_f
 
-  	loc_id = Array.new
+  	points = Array.new
   	Location.all.each do |location| #iterate locations
-      if isWithinSearchRadius(location.coordinates, lat, lng)
-        loc_id << location.id
-      end
+      distance = getMinDistance(location.coordinates, lat, lng)
+      location.update_attribute(:distance, distance)
     end
-	
-	  @result = Article.where("location_id IN (?)", loc_id).joins(:publication, :location)
+
+	  @result = Article.joins(:publication, :location).order('distance')
   	render "publication_map/search_result", :locals => {:res => @result}
   end
 
-  def isWithinSearchRadius(coordinates, lat, lng)
+  def getMinDistance(coordinates, lat, lng)
+    min_distance = Float::MAX
     polygons = coordinates.split("|")
 
     polygons.each do |polygon| #iterate polygons
@@ -42,12 +30,12 @@ class PublicationMapController < ApplicationController
         longitude = coordinate[1].to_f
 
         distance = distance([lat, lng], [latitude, longitude])
-        if distance < 100
-          return true
+        if distance < min_distance
+          min_distance = distance
         end
       end
     end
-    return false
+    return min_distance
   end
 
   def distance loc1, loc2
