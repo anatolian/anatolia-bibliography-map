@@ -16,13 +16,13 @@ class AdminsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create admin" do
-    assert_difference('Admin.count') do
-      post :create, admin: { user_id: @admin.user_id }
-    end
+  # test "should create admin" do
+  #   assert_difference('Admin.count') do
+  #     post :create, admin: { user_id: @admin.user_id }
+  #   end
 
-    assert_redirected_to admin_path(assigns(:admin))
-  end
+  #   assert_redirected_to admin_path(assigns(:admin))
+  # end
 
   test "should show admin" do
     get :show, id: @admin
@@ -34,10 +34,10 @@ class AdminsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should update admin" do
-    patch :update, id: @admin, admin: { user_id: @admin.user_id }
-    assert_redirected_to admin_path(assigns(:admin))
-  end
+  # test "should update admin" do
+  #   patch :update, id: @admin, admin: { user_id: @admin.user_id }
+  #   assert_redirected_to admin_path(assigns(:admin))
+  # end
 
   test "should destroy admin" do
     assert_difference('Admin.count', -1) do

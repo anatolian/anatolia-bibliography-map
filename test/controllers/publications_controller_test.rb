@@ -16,13 +16,13 @@ class PublicationsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create publication" do
-    assert_difference('Publication.count') do
-      post :create, publication: { number: @publication.number, publication_serie: @publication.publication_serie, url: @publication.url, volume: @publication.volume }
-    end
+  # test "should create publication" do
+  #   assert_difference('Publication.count') do
+  #     post :create, publication: { number: @publication.number, publication_serie: @publication.publication_serie, url: @publication.url, volume: @publication.volume }
+  #   end
 
-    assert_redirected_to publication_path(assigns(:publication))
-  end
+  #   assert_redirected_to publication_path(assigns(:publication))
+  # end
 
   test "should show publication" do
     get :show, id: @publication
@@ -34,10 +34,10 @@ class PublicationsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should update publication" do
-    patch :update, id: @publication, publication: { number: @publication.number, publication_serie: @publication.publication_serie, url: @publication.url, volume: @publication.volume }
-    assert_redirected_to publication_path(assigns(:publication))
-  end
+  # test "should update publication" do
+  #   patch :update, id: @publication, publication: { number: @publication.number, publication_serie: @publication.publication_serie, url: @publication.url, volume: @publication.volume }
+  #   assert_redirected_to publication_path(assigns(:publication))
+  # end
 
   test "should destroy publication" do
     assert_difference('Publication.count', -1) do
