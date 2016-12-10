@@ -19,7 +19,7 @@
         <%= submit_tag "filter", name: "filter[#{keyword}]", class: 'btn btn-default btn-sm btn-info' %>
       </div>
     <% end %>
-    <div class="row">
+    <div class="row" id="backHome">
       <%= link_to "&nbsp;back to home page".html_safe, :controller => "publication_map", :style => "color:#030a4b;" %>
     </div>
   </div>
